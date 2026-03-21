@@ -1,0 +1,20 @@
+[project]
+name = "h2m"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Rebecca Benton", email = "becky@beckybenton.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "markdownify>=1.2.2",
+    "pyobjc-framework-cocoa>=12.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.26,<0.10.0"]
+build-backend = "uv_build"
+
+[project.scripts]
+h2m = "h2m:convert"
