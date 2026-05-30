@@ -12,8 +12,11 @@ dependencies = [
     "pyobjc-framework-cocoa>=12.1",
 ]
 
+[tool.uv]
+exclude-newer = "2026-06-05T00:00:00Z"
+
 [build-system]
-requires = ["uv_build>=0.9.26,<0.10.0"]
+requires = ["uv_build>=0.9.26,<0.12"]
 build-backend = "uv_build"
 
 [project.scripts]
