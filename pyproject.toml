@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [tool.uv]
-exclude-newer = "2026-06-05T00:00:00Z"
+exclude-newer = "1 week"
 
 [build-system]
 requires = ["uv_build>=0.9.26,<0.12"]
