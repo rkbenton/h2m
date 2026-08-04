@@ -30,14 +30,46 @@ chmod +x /path/to/h2m/h2m.py
 ln -s /path/to/h2m/h2m.py ~/.local/bin/h2m
 ```
 
-For example, if the project lives in Dropbox:
+For example, if the project lives in Dropbox. **Note that Dropbox uses one of two
+locations depending on how it was installed** — check which one exists on your machine
+before copying a command:
+
+```bash
+ls -d ~/Dropbox ~/Library/CloudStorage/Dropbox 2>/dev/null
+```
+
+Older installs (and machines upgraded from them) use `~/Dropbox`:
+
+```bash
+chmod +x ~/Dropbox/PythonStuff/h2m/h2m.py
+ln -s ~/Dropbox/PythonStuff/h2m/h2m.py ~/.local/bin/h2m
+```
+
+Newer installs use the File Provider path under `~/Library/CloudStorage`:
 
 ```bash
 chmod +x ~/Library/CloudStorage/Dropbox/PythonStuff/h2m/h2m.py
 ln -s ~/Library/CloudStorage/Dropbox/PythonStuff/h2m/h2m.py ~/.local/bin/h2m
 ```
 
+Or let the shell pick whichever is present:
+
+```bash
+for d in ~/Dropbox ~/Library/CloudStorage/Dropbox; do
+  [ -f "$d/PythonStuff/h2m/h2m.py" ] || continue
+  chmod +x "$d/PythonStuff/h2m/h2m.py"
+  ln -sf "$d/PythonStuff/h2m/h2m.py" ~/.local/bin/h2m
+  break
+done
+```
+
 That's it. Run `h2m` from any directory.
+
+> **Use a symlink (`ln -s`), not a hard link.** A hard link points at the file's inode
+> rather than its path, so if Dropbox ever replaces `h2m.py` instead of editing it in
+> place, `h2m` will keep silently running a stale copy of the script. Check what you
+> have with `ls -l ~/.local/bin/h2m` — a symlink shows an `->` arrow. If it doesn't,
+> replace it: `rm ~/.local/bin/h2m` and re-run the `ln -s` above.
 
 > `~/.local/bin` must be on your PATH. If it isn't, add this to your `~/.zshrc`:
 > ```bash
