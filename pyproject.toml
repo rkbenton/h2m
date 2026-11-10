@@ -15,6 +15,12 @@ dependencies = [
 [tool.uv]
 exclude-newer = "1 week"
 
+[tool.ty.analysis]
+# pyobjc builds the names in AppKit dynamically when it is imported and ships no type
+# stubs, so ty cannot see NSPasteboard and friends even though they exist at runtime.
+# Only AppKit is allowed; every other unresolved import is still reported.
+allowed-unresolved-imports = ["AppKit.**"]
+
 [build-system]
 requires = ["uv_build>=0.9.26,<0.12"]
 build-backend = "uv_build"

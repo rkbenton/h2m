@@ -79,7 +79,7 @@ def convert():
         pb.clearContents()
         pb.setString_forType_(markdown, NSPasteboardTypeString)
         
-        print(f"✅ Success!")
+        print("✅ Success!")
         print(f"   Input:  {len(html_data)} characters (HTML)")
         print(f"   Output: {len(markdown)} characters (GFM Markdown)")
         print("🚀 Your pasteboard now contains the Markdown version.")
